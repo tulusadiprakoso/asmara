@@ -32,6 +32,13 @@ class M_Data extends CI_Model
         $this->db->where($this->pk,$id);
         $this->db->update($table,$data);
     }
+    public function sto_doedit($id,$data){
+        $table="tbl_sto";
+
+        $this->db->where($this->pk,$id);
+        $this->db->update($table,$data);
+    }
+
 
     public function sto_hapus($id){
         $table="tbl_sto";

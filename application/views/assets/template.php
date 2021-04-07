@@ -56,18 +56,18 @@
     <script src="<?= base_url();?>assets/template/js/pages/be_tables_datatables.min.js"></script>
     <script>
     $(function() {
-        $("#btn-edit").click(function(){
+        $(document).on('click', '.edit_data', function(){  
             $('#modal').modal({
                 backdrop: 'static'  ,
                 show: true
             });
-            id = $(this).data('id');    
-            $('#form')[0].reset();
+            id = $(this).attr('id');   
+            data :{id:id} ;
             // mengambil nilai data-id yang di click
             $.ajax({
                 url: 'sto_edit/' + id,
                 success: function(data) {
-                    $("select[name='id']").val(data.id);
+                    $("input[name='id']").val(data.id);
                     $("input[name='title']").val(data.title);
                     $("textarea[name='datel']").val(data.datel);
                     $('#modal').modal('show');

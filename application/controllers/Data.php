@@ -53,8 +53,10 @@ class Data extends CI_Controller{
 			'datel' => $this->input->post('datel'),
 			'time' => $this->input->post('time')
 		];    
-		$this->M_data->sto_doedit($id,$data);
+		$id =  $this->input->post('id');
 
+		$this->M_data->sto_doedit($id,$data);
+		redirect("data/sto");
 		
 	}
 	

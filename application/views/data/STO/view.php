@@ -51,12 +51,10 @@
 
 
                                <td class="d-none d-sm-table-cell"><?= $r['datel']; ?></td>
-
-
                                <td>
-                  
-                            <button id='btn-edit' class="btn btn-info" data-id='<?php echo $r['id'];?>'>Edit</button>
-                                   <a class="btn btn-danger" title="Tombol Hapus"
+                                   <!-- <button id='btn-edit' class="btn btn-info" data-id="<?php echo $r['id'];?>">Edit</button> -->
+                                   <input type="button" name="edit" value="Edit" id="<?php echo $r["id"]; ?>" class="btn btn-info btn-xs edit_data" />
+                       <a class=" btn btn-danger" title="Tombol Hapus"
                                        href="<?= base_url('sto_hapus/').$r['id']; ?>"><i class="fas fa-trash"></i></a>
                                </td>
 
@@ -71,116 +69,138 @@
                </div>
            </div>
            <!-- END Dynamic Table with Export Buttons -->
+       </div>
+       <!-- Fade In Block Modal -->
+       <div class="modal fade" id="modal-block-fadein" tabindex="-1" role="dialog" aria-labelledby="modal-block-fadein"
+           aria-hidden="true">
+           <div class="modal-dialog" role="document">
 
-           <!-- Fade In Block Modal -->
-           <div class="modal fade" id="modal-block-fadein" tabindex="-1" role="dialog"
-               aria-labelledby="modal-block-fadein" aria-hidden="true">
-               <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                   <form class="js-validation" action="sto_tambah" method="POST">
 
-                   <div class="modal-content">
-                       <form class="js-validation" action="sto_tambah" method="POST">
-
-                           <div class="block block-themed block-transparent mb-0">
-                               <div class="block-header bg-primary-dark">
-                                   <h3 class="block-title">Input</h3>
-                                   <div class="block-options">
-                                       <button type="button" class="btn-block-option" data-dismiss="modal"
-                                           aria-label="Close">
-                                           <i class="fa fa-fw fa-times"></i>
-                                       </button>
-                                   </div>
+                       <div class="block block-themed block-transparent mb-0">
+                           <div class="block-header bg-primary-dark">
+                               <h3 class="block-title">Input</h3>
+                               <div class="block-options">
+                                   <button type="button" class="btn-block-option" data-dismiss="modal"
+                                       aria-label="Close">
+                                       <i class="fa fa-fw fa-times"></i>
+                                   </button>
                                </div>
-                               <div class="block-content">
-                                   <div class="block block-rounded">
+                           </div>
+                           <div class="block-content">
+                               <div class="block block-rounded">
 
-                                       <div class="block-content block-content-full">
-                                           <div class="">
+                                   <div class="block-content block-content-full">
+                                       <div class="">
 
 
-                                               <!-- Advanced -->
+                                           <!-- Advanced -->
 
-                                               <div class="row items-push">
+                                           <div class="row items-push">
 
-                                                   <div class="col-lg-12">
-                                                       <div class="form-group">
-                                                           <label for="val-suggestions">Title <span
-                                                                   class="text-danger">*</span></label>
-                                                           <input type="text" class="form-control" id="val-suggestions"
-                                                               name="title" placeholder="STO">
-                                                       </div>
-                                                       <div class="form-group">
-                                                           <label for="val-skill">Datel <span
-                                                                   class="text-danger">*</span></label>
-                                                           <select class="form-control" id="val-skill" name="datel">
-                                                               <option value="samarinda">SAMARINDA</option>
-                                                               <option value="bontang">BONTANG</option>
-                                                               <option value="tenggarong">TENGGARONG</option>
+                                               <div class="col-lg-12">
+                                                   <div class="form-group">
+                                                       <label for="val-suggestions">Title <span
+                                                               class="text-danger">*</span></label>
+                                                       <input type="text" class="form-control" id="val-suggestions"
+                                                           name="title" placeholder="STO">
+                                                   </div>
+                                                   <div class="form-group">
+                                                       <label for="val-skill">Datel <span
+                                                               class="text-danger">*</span></label>
+                                                       <select class="form-control" id="val-skill" name="datel">
+                                                           <option value="samarinda">SAMARINDA</option>
+                                                           <option value="bontang">BONTANG</option>
+                                                           <option value="tenggarong">TENGGARONG</option>
 
-                                                           </select>
-
-                                                       </div>
-
+                                                       </select>
 
                                                    </div>
+
+
                                                </div>
-                                               <!-- END Advanced -->
-
-
-
-
                                            </div>
+                                           <!-- END Advanced -->
+
+
+
+
                                        </div>
                                    </div>
                                </div>
-                               <div class="block-content block-content-full text-right bg-light">
-                                   <button type="button" class="btn btn-sm btn-light"
-                                       data-dismiss="modal">Close</button>
-                                   <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-                               </div>
-                       </form>
+                           </div>
+                           <div class="block-content block-content-full text-right bg-light">
+                               <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">Close</button>
+                               <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                           </div>
+                   </form>
 
-                   </div>
+               </div>
+           </div>
+       </div>
+       </div>
+       <!-- END Fade In Block Modal -->
+
+       <!-- Fade In Block Modal -->
+       <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-fadein"
+           aria-hidden="true">
+           <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                   <form class="js-validation" action="<?php echo base_url(); ?>data/sto_doedit" method="POST">
+
+                       <div class="block block-themed block-transparent mb-0">
+                           <div class="block-header bg-primary-dark">
+                               <h3 class="block-title">Input</h3>
+                               <div class="block-options">
+                                   <button type="button" class="btn-block-option" data-dismiss="modal"
+                                       aria-label="Close">
+                                       <i class="fa fa-fw fa-times"></i>
+                                   </button>
+                               </div>
+                           </div>
+                           <div class="block-content">
+                               <div class="block block-rounded">
+                                   <div class="block-content block-content-full">
+                                       <div class="">
+                                           <!-- Advanced -->
+                                           <input type="hidden" class="form-control" id="val-suggestions"
+                                                           name="id" placeholder="id">
+                                           <div class="row items-push">
+
+                                               <div class="col-lg-12">
+                                                   <div class="form-group">
+                                                       <label for="val-suggestions">Title <span
+                                                               class="text-danger">*</span></label>
+                                                       <input type="text" class="form-control" id="val-suggestions"
+                                                           name="title" placeholder="STO">
+                                                   </div>
+                                                   <div class="form-group">
+                                                       <label for="val-skill">Datel <span
+                                                               class="text-danger">*</span></label>
+                                                       <select class="form-control" id="val-skill" name="datel">
+                                                           <option value="samarinda">SAMARINDA</option>
+                                                           <option value="bontang">BONTANG</option>
+                                                           <option value="tenggarong">TENGGARONG</option>
+
+                                                       </select>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <!-- END Advanced -->
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="block-content block-content-full text-right bg-light">
+                               <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">Close</button>
+                               <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                           </div>
+                   </form>
+
                </div>
            </div>
        </div>
        <!-- END Fade In Block Modal -->
 
-
-             <div class="modal fade in"  tabindex="-1" id="modal"   aria-hidden="true" role="dialog">
-               <div class="modal-dialog moda-md">
-                   <div class="modal-content">
-                       <div class="modal-header">
-                           <button type="button" class="close" data-dismiss="modal"></button>
-                           <div class="modal-title">
-                               <h5>Edit</h5>
-                           </div>
-                       </div>
-                       <form class="form-horizontal" id="form" role="form" method="post" action="<?php echo base_url(); ?>input_activity/update"> 
-                           <div class="card-body">
-                                   <input type="hidden" name="id" value="">   
-                               <div class="form-group">
-                                   <label for="exampleInputPassword1">Title</label>
-                                   <input type="text" name="title" class="form-control" id="exampleInputPassword1"
-                                       placeholder="title" required="" value="">
-                               </div>
-                               <div class="form-group">
-                                   <label for="exampleInputPassword1">Datel</label>
-                                   <select class="form-control" id="val-skill" name="datel">
-                                       <option value="samarinda">SAMARINDA</option>
-                                       <option value="bontang">BONTANG</option>
-                                       <option value="tenggarong">TENGGARONG</option>
-
-                                   </select>
-                               </div>
-                               <div class="form-group clearfix">
-                                   <button type="button" data-dismiss="modal" id='btn' class="btn btn-success pull-right">Batal</button>
-                                   <button type="button" id='btn' class="btn btn-success pull-right">Simpan</button>
-                               </div>
-                       </form>
-                   </div>
-               </div>
-           </div>
-
-
-           
-           </div>
+       </div>
