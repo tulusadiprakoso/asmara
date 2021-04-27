@@ -14,6 +14,9 @@ class M_Data extends CI_Model
     private $table_detail = "tbl_target";
     private $pk_detail = "id";
 
+    private $table_detail_witel = "tbl_target_witel";
+    private $pk_detail_witel = "id";
+
     private $table_witel = "tbl_witel";
     private $pk_witel = "id";
     
@@ -112,6 +115,12 @@ class M_Data extends CI_Model
         $query = $this->db->delete('tbl_target_tahun');
     }
 
+    // =====================
+    // TARGET WITEL
+    // =====================
+    
+  
+
     public function getdata_target_detail($id){
         $this->db->select('tbl_sto.title as tsto, tbl_sto.id, tbl_target.*, tbl_target.id as idtarget, tbl_target_tahun.tahun, tbl_target_tahun.id');
         // $this->db->from('');
@@ -121,6 +130,30 @@ class M_Data extends CI_Model
         $query = $this->db->get('tbl_target');
         return $query->result_array();
     }
+     public function getdata_target_detail_witel($id){
+        $this->db->select('tbl_witel.title as twitel, tbl_witel.id, tbl_target_witel.*, tbl_target_witel.id as idtarget, tbl_target_tahun.tahun, tbl_target_tahun.id');
+        // $this->db->from('');
+        $this->db->join('tbl_witel','tbl_target_witel.id_witel = tbl_witel.id' );
+        $this->db->join('tbl_target_tahun','tbl_target_witel.id_tahun = tbl_target_tahun.id' );
+        $this->db->where('id_tahun', $id);
+        $query = $this->db->get('tbl_target_witel');
+        return $query->result_array();
+    }
+    public function getdata_target_witel_dodetail($id){
+        $this->db->where('id',$id);
+        $query = $this->db->get($this->table_detail_witel);
+        return $query->result_array();
+    }
+
+    // Update record
+    function update_witel_detail($id,$field,$value){
+
+        // Update
+        $data=array($field => $value);
+        $this->db->where('id',$id);
+        $this->db->update('tbl_target_witel',$data);
+    }
+
     // Update record
     function update_detail($id,$field,$value){
 
@@ -141,9 +174,22 @@ class M_Data extends CI_Model
        
         return $query->result_array();
     }
+    public function getdata_target_witel(){
+        $this->db->select('*');
+        // $this->db->from('');
+        $this->db->where('id NOT IN(SELECT id_witel FROM tbl_target_witel)');
 
+        //$this->db->where('tbl_sto.id !=','tbl_target.id_sto');
+        // $this->db->select('*');
+        $query = $this->db->get($this->table_witel);
+       
+        return $query->result_array();
+    }
     public function target_detail_tambah($data){
         $this->db->insert($this->table_detail,$data);
+    }
+    public function target_detail_witel_tambah($data){
+        $this->db->insert($this->table_detail_witel,$data);
     }
     
 
@@ -158,7 +204,12 @@ class M_Data extends CI_Model
         $this->db->where('id', $id);
         $query = $this->db->delete('tbl_target');
     }
-    
+
+
+    //============================================
+    //                WITEL
+    //============================================
+
     public function getdata_witel(){
         $query = $this->db->get($this->table_witel);
         return $query->result_array();

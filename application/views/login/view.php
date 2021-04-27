@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-        <title>Dashmix - Bootstrap 4 Admin Template &amp; UI Framework</title>
+        <title>ASMARA</title>
 
         <meta name="description" content="Dashmix - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
         <meta name="author" content="pixelcave">
@@ -129,13 +129,13 @@
                                     <div class="block-content block-content-full px-lg-5 py-md-5 py-lg-6">
                                         <div class="media">
                                             <a class="img-link mr-3" href="javascript:void(0)">
-                                                <img class="img-avatar img-avatar-thumb" src="assets/media/avatars/avatar16.jpg" alt="">
+                                                <img class="img-avatar img-avatar-thumb" src="<?= base_url('assets/template/'); ?>media/avatars/avatar16.jpg" alt="">
                                             </a>
                                             <div class="media-body">
                                                 <p class="text-white font-w600 mb-1">
-                                                    Amazing framework with tons of options! It helped us build our project!
+                                                    Hy !
                                                 </p>
-                                                <a class="text-white-75 font-w600" href="javascript:void(0)">Scott Young, Web Developer</a>
+                                                <a class="text-white-75 font-w600" href="javascript:void(0)">Witel Samarinda</a>
                                             </div>
                                         </div>
                                     </div>

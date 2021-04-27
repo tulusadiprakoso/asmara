@@ -8,14 +8,14 @@
 
 <body>
     <div id="page-container"
-        class="<?php if($this->uri->segment(2)=='target_detail'){echo 'sidebar';} else{echo 'sidebar-o';} ?> sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
-        <?php $this->load->view('assets/sideoverlay'); ?>
-        <?php $this->load->view('assets/sidebar'); ?>
-        <?php $this->load->view('assets/header'); ?>
-        <?php $this->load->view($view); ?>
-        <?php $this->load->view('assets/footer'); ?>
+    class="<?php if($this->uri->segment(2)=='target_detail'){echo 'sidebar';} else{echo 'sidebar-o';} ?> sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+    <?php //$this->load->view('assets/sideoverlay'); ?>
+    <?php $this->load->view('assets/sidebar'); ?>
+    <?php $this->load->view('assets/header'); ?>
+    <?php $this->load->view($view); ?>
+    <?php $this->load->view('assets/footer'); ?>
 
-    </div>
+</div>
 
     <!--
             Dashmix JS Core
@@ -33,7 +33,7 @@
             <?= base_url();?>assets/template/js/core/jquery.appear.min.js
             <?= base_url();?>assets/template/js/core/js.cookie.min.js
         -->
-    <script src="<?= base_url();?>assets/template/js/dashmix.core.min.js"></script>
+        <script src="<?= base_url();?>assets/template/js/dashmix.core.min.js"></script>
 
     <!--
             Dashmix JS
@@ -41,32 +41,32 @@
             Custom functionality including Blocks/Layout API as well as other vital and optional helpers
             webpack is putting everything together at <?= base_url();?>assets/template/_js/main/app.js
         -->
-    <script src="<?= base_url();?>assets/template/js/dashmix.app.min.js"></script>
+        <script src="<?= base_url();?>assets/template/js/dashmix.app.min.js"></script>
 
-    <!-- Page JS Plugins -->
-    <script src="<?= base_url();?>assets/template/js/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url();?>assets/template/js/plugins/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="<?= base_url();?>assets/template/js/plugins/datatables/buttons/dataTables.buttons.min.js"></script>
-    <script src="<?= base_url();?>assets/template/js/plugins/datatables/buttons/buttons.print.min.js"></script>
-    <script src="<?= base_url();?>assets/template/js/plugins/datatables/buttons/buttons.html5.min.js"></script>
-    <script src="<?= base_url();?>assets/template/js/plugins/datatables/buttons/buttons.flash.min.js"></script>
-    <script src="<?= base_url();?>assets/template/js/plugins/datatables/buttons/buttons.colVis.min.js"></script>
+        <!-- Page JS Plugins -->
+        <script src="<?= base_url();?>assets/template/js/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="<?= base_url();?>assets/template/js/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="<?= base_url();?>assets/template/js/plugins/datatables/buttons/dataTables.buttons.min.js"></script>
+        <script src="<?= base_url();?>assets/template/js/plugins/datatables/buttons/buttons.print.min.js"></script>
+        <script src="<?= base_url();?>assets/template/js/plugins/datatables/buttons/buttons.html5.min.js"></script>
+        <script src="<?= base_url();?>assets/template/js/plugins/datatables/buttons/buttons.flash.min.js"></script>
+        <script src="<?= base_url();?>assets/template/js/plugins/datatables/buttons/buttons.colVis.min.js"></script>
 
-    <!-- Page JS Code -->
-    <script src="<?= base_url();?>assets/template/js/pages/be_tables_datatables.min.js"></script>
-    <?php if($this->uri->segment(2)=="ksto"){ ?>
+        <!-- Page JS Code -->
+        <script src="<?= base_url();?>assets/template/js/pages/be_tables_datatables.min.js"></script>
+        <?php if($this->uri->segment(2)=="ksto"){ ?>
 
-    <script>
-    $(function() {
-        $(document).on('click', '.edit_data', function() {
-            $('#modal').modal({
-                backdrop: 'static',
-                show: true
-            });
-            id = $(this).attr('id');
-            data: {
-                id: id
-            };
+            <script>
+                $(function() {
+                    $(document).on('click', '.edit_data', function() {
+                        $('#modal').modal({
+                            backdrop: 'static',
+                            show: true
+                        });
+                        id = $(this).attr('id');
+                        data: {
+                            id: id
+                        };
             // mengambil nilai data-id yang di click
             $.ajax({
                 url: 'ksto_edit/' + id,
@@ -79,21 +79,46 @@
                 }
             });
         });
-    });
-    </script>
-<?php }else if($this->uri->segment(2)=="sto"){ ?>
+                });
+            </script>
+        <?php }else if($this->uri->segment(2)=="witel"){ ?>
+            <script>
+                $(function() {
+                    $(document).on('click', '.edit_data', function() {
+                        $('#modal').modal({
+                            backdrop: 'static',
+                            show: true
+                        });
+                        id = $(this).attr('id');
+                        data: {
+                            id: id
+                        };
+            // mengambil nilai data-id yang di click
+            $.ajax({
+                url: 'witel_edit/' + id,
+                success: function(data) {
+                    $("input[name='id']").val(data.id);
+                    $("input[id='val-title']").val(data.title);
+                    $('#modal').modal('show');
 
-<script>
-    $(function() {
-        $(document).on('click', '.edit_data', function() {
-            $('#modal').modal({
-                backdrop: 'static',
-                show: true
+                }
             });
-            id = $(this).attr('id');
-            data: {
-                id: id
-            };
+        });
+                });
+            </script>
+        <?php }else if($this->uri->segment(2)=="sto"){ ?>
+
+            <script>
+                $(function() {
+                    $(document).on('click', '.edit_data', function() {
+                        $('#modal').modal({
+                            backdrop: 'static',
+                            show: true
+                        });
+                        id = $(this).attr('id');
+                        data: {
+                            id: id
+                        };
 
             // mengambil nilai data-id yang di click
             $.ajax({
@@ -109,21 +134,20 @@
                 }
             });
         });
-    });
-    </script>
-    <?php } ?>
-
-    <script>
-    $(function() {
-        $(document).on('click', '.edit_data', function() {
-            $('#modal').modal({
-                backdrop: 'static',
-                show: true
-            });
-            id = $(this).attr('id');
-            data: {
-                id: id
-            };
+                });
+            </script>
+        <?php }else if($this->uri->segment(2)=="target"){ ?>
+           <script>
+            $(function() {
+                $(document).on('click', '.edit_data', function() {
+                    $('#modal').modal({
+                        backdrop: 'static',
+                        show: true
+                    });
+                    id = $(this).attr('id');
+                    data: {
+                        id: id
+                    };
 
             // mengambil nilai data-id yang di click
             $.ajax({
@@ -139,11 +163,16 @@
                 }
             });
         });
-    });
-    </script>
+            });
+        </script>
+    <?php } ?>
+
+
+
+   
 
 <script type="text/javascript">
-    $(document).ready(function(){
+        $(document).ready(function(){
         document.getElementById("updateTotal").click(); // Click on the checkbox
 
         // On text click
@@ -157,7 +186,7 @@
 
           // Hide clicked element
           $(this).hide();
-        });
+      });
 
         // Focus out from a textbox
         $('.txtedit').focusout(function(){
@@ -171,11 +200,11 @@
 
             // Sending AJAX request
             $.ajax({
-              url: '<?=base_url();?>data/update_detail',
+              url: '<?=base_url();?>data/update_witel_detail',
               type: 'post',
               data: { field:fieldname, value:value, id:edit_id },
               success:function(response){
-                
+
                 // Hide Input element
                 $(element).hide();
 
@@ -183,12 +212,62 @@
                 $(element).prev('.spedit').show();
                 $(element).prev('.spedit').text(value);
                 document.getElementById("updateTotal").click(); // Click on the checkbox
-              }
-            });
+            }
+        });
         });
     });
-    </script>
-    <script type="text/javascript">
+</script>
+<!-- TARGET DETAIL WITEL -->
+
+ <script type="text/javascript">
+        $(document).ready(function(){
+                      $('.txtedit_witel').hide();
+
+        // document.getElementById("updateTotal").click(); // Click on the checkbox
+
+        // On text click
+        $('.spedit_witel').click(function(){
+
+          // Hide input element
+
+          // Show next input element
+          $(this).next('.txtedit_witel').show().focus();
+
+          // Hide clicked element
+          $(this).hide();
+      });
+
+        // Focus out from a textbox
+        $('.txtedit_witel').focusout(function(){
+            // Get edit id, field name and value
+            var edit_id = $(this).data('id');
+            var fieldname = $(this).data('field');
+            var value = $(this).val();
+            
+            // assign instance to element variable
+            var element = this;
+
+            // Sending AJAX request
+            $.ajax({
+              url: '<?=base_url();?>data/update_witel_detail',
+              type: 'post',
+              data: { field:fieldname, value:value, id:edit_id },
+              success:function(response){
+
+                // Hide Input element
+                $(element).hide();
+
+                // Update viewing value and display it
+                $(element).prev('.spedit_witel').show();
+                $(element).prev('.spedit_witel').text(value);
+                // document.getElementById("updateTotal").click(); // Click on the checkbox
+            }
+        });
+        });
+    });
+</script>
+
+<script type="text/javascript">
 // jumlahkan table wal
 function addRows(tableId, column, resultId) {
 
@@ -205,19 +284,22 @@ function addRows(tableId, column, resultId) {
 
 
         cell = rows[i].cells[j];
-                console.log(cell.textContent);
+        // console.log(cell.textContent);
 
         total += Number(cell.textContent || cell.innerText);
             // document.getElementById(resultId).innerHTML = total.toFixed(2);
 
-      }
-      cell = rows[i].cells[j];
-      cell.innerHTML = total.toFixed(0);
-      total = 0;
+        }
+        cell = rows[i].cells[j];
+        cell.innerHTML = total.toFixed(0);
+        total = 0;
 
     }
 }
 </script>
+
+
+
 
 </body>
 

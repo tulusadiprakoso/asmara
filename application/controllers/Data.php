@@ -19,7 +19,7 @@ class Data extends CI_Controller{
 		$this->load->view("assets/template",$data);
 	}
 	public function ksto(){
-		$data['title'] = "Halaman Data";
+		$data['title'] = "KSTO";
 		$data["query"] = $this->M_data->getdata();
 		$data["view"]="data/ksto/view";
 		$this->load->view("assets/template",$data);
@@ -276,7 +276,9 @@ public function target_hapus()
 public function target_detail($id){
 	$data['title'] = "Halaman Data Target";
 	$data["query"] = $this->M_data->getdata_target_detail($id);
+	$data["witel"] = $this->M_data->getdata_target_detail_witel($id);
 	$data["sto"] = $this->M_data->getdata_target_sto();
+	$data["dwitel"] = $this->M_data->getdata_target_witel();
 	$data["view"]="data/target_detail/view";
 	$this->load->view("assets/template",$data);	
 }
@@ -391,8 +393,126 @@ public function target_detail_dohapus()
 	}
 }
 
+//=====================
+// TARGET WITEL
+//====================
+
+public function update_witel_detail(){
+	// POST values
+	$id = $this->input->post('id');
+	$field = $this->input->post('field');
+	$value = $this->input->post('value');
+
+	// Update records
+	$this->M_data->update_witel_detail($id,$field,$value);
+	$data["query"] = $this->M_data->getdata_target_witel_dodetail($id);
+	 foreach($data["query"] as $r){
+		 $total= $r['jan'] + $r['feb'] + $r['mar'] + $r['apr'] + $r['may'] + $r['jun'] + $r['jul'] + $r['aug'] + $r['sep'] + $r['okt'] + $r['nov'] + $r['des'];
+	 }
+	 $data['total'] =	$this->M_data->update_witel_detail($id,'total',$total);
+ 
+
+	echo 1;
+	exit;
+  }
+
+public function target_detail_witel_tambah(){
+	$data['title'] = "Halaman Tambah"; 
+	$this->session->set_flashdata('msg', 
+	'<div class="alert alert-success alert-dismissable" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">×</span>
+	</button>
+	<p class="mb-0">Telah Berhasil Menginput Data </p>
+</div>');      
+	// $data['query'] = $this->M_data->getdata_target_detail();
+	$data = [
+		'id_witel' => $this->input->post('id_witel'),
+		'id_tahun' => $this->input->post('id_tahun'),
+		'jan' =>0,
+		'feb' => 0,
+		'mar' => 0,
+		'apr' => 0,
+		'may' => 0,
+		'jun' => 0,
+		'jul' => 0,
+		'aug' => 0,
+		'sep' => 0,
+		'okt' => 0,
+		'nov' => 0,
+		'des' => 0,
+		'total' => 0,
+	];
+		
+		
+		$this->M_data->target_detail_witel_tambah($data);
+		redirect("data/target_detail/".$data['id_tahun']);
+}
+
+public function target_detail_witel_edit() {
+	$id = $this->uri->segment(3);
+	$e = $this->db->where('id', $id)->get('tbl_target_tahun')->row();
+
+	$kirim['id'] = $e->id;
+	$kirim['tahun'] = $e->tahun;
+	// $kirim['id_ksto'] = $e->id_ksto;
+	// $kirim['datel'] = $e->datel;
+
+	$this->output
+			->set_content_type('application/json')
+			->set_output(json_encode($kirim));
+}
+
+public function target_detail_witel_doedit(){
+	$this->session->set_flashdata('msg', 
+	'<div class="alert alert-success alert-dismissable" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">×</span>
+	</button>
+	<p class="mb-0">Telah Berhasil Mengedit Data </p>
+</div>');    
+	$data = [
+		'tahun' => $this->input->post('tahun'),
+		// 'datel' => $this->input->post('datel'),
+		// 'time' => $this->input->post('time')
+	];    
+	$id =  $this->input->post('id');
+
+	$this->M_data->target_detail_witel_doedit($id,$data);
+	redirect("data/target_detail");
+	
+}
+
+
+public function target_detail_witel_dohapus()
+{
+	$this->session->set_flashdata('msg', 
+		'<div class="alert alert-success alert-dismissable" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">×</span>
+		</button>
+		<p class="mb-0">Telah Berhasil Menghapus Data </p>
+	</div>');    
+	$id = $this->uri->segment(4);
+	// echo $id;
+	// exit();
+
+	$proses = $this->M_data->target_detail_witel_dohapus($id);
+	if (!$proses) {
+		redirect(base_url('data/target_detail/'.$this->uri->segment(3)));
+	} else {
+		echo "Data Gagal dihapus";
+		echo "<br>";
+		echo "<a href='".base_url('data/target_detail/'.$this->uri->segment(3))."'>Hapus data</a>";
+	}
+}
+
+//=====================
+// WITEL
+//====================
+
 public function witel(){
-	$data['title'] = "Halaman Data";
+	$data['title'] = "Data Witel";
 	$data["query"] = $this->M_data->getdata_witel();
 	// $data["sto"] = $this->M_data->getdata_sto();
 	$data["view"]="data/witel/view";
@@ -409,7 +529,7 @@ public function witel_tambah(){
 </div>');    
 			$data = [
 			'title' => $this->input->post('title'),
-			'id_ksto' => $this->input->post('id_ksto'),
+			'regional' => $this->input->post('regional'),
 			// 'datel' => $this->input->post('datel'),
 		];
 		
@@ -424,7 +544,7 @@ public function witel_edit() {
 
 	$kirim['id'] = $e->id;
 	$kirim['title'] = $e->title;
-	$kirim['id_ksto'] = $e->id_ksto;
+	$kirim['regional'] = $e->regional;
 	// $kirim['datel'] = $e->datel;
 
 	$this->output
@@ -446,9 +566,7 @@ public function witel_doedit(){
 	$data = [
 		
 		'title' => $this->input->post('title'),
-		'id_ksto' => $this->input->post('id_ksto'),
-		// 'datel' => $this->input->post('datel'),
-		'time' => $this->input->post('time')
+			'regional' => $this->input->post('regional'),
 	];    
 	$id =  $this->input->post('id');
 

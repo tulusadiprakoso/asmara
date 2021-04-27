@@ -395,7 +395,7 @@
                     </ul>
                 </li>
                 <li class="nav-main-heading">Pengaturan</li>
-                <li class="nav-main-item">
+                <li class="nav-main-item <?php if($this->uri->segment(1)=='data'){echo 'open'; }?>">
                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
                         aria-expanded="false" href="#">
                         <i class="nav-main-link-icon fa fa-border-all"></i>
@@ -403,22 +403,23 @@
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="<?= base_url(); ?>data/ksto">
-                                <span class="nav-main-link-name">KSTO</span>
-                            </a>
-                        </li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="<?= base_url(); ?>data/sto">
-                                <span class="nav-main-link-name">STO</span>
-                            </a>
-                        </li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="<?= base_url(); ?>data/target">
+                            <a class="nav-main-link <?php if($this->uri->segment(2)=='target' || $this->uri->segment(2)=='target_detail' ){echo 'active'; }?>" href="<?= base_url(); ?>data/target">
                                 <span class="nav-main-link-name">Target</span>
                             </a>
                         </li>
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="<?= base_url(); ?>data/witel">
+                            <a class="nav-main-link <?php if($this->uri->segment(2)=='ksto'){echo 'active'; }?>" href="<?= base_url(); ?>data/ksto">
+                                <span class="nav-main-link-name">KSTO</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link <?php if($this->uri->segment(2)=='sto'){echo 'active'; }?>" href="<?= base_url(); ?>data/sto">
+                                <span class="nav-main-link-name">STO</span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-main-item ">
+                            <a class="nav-main-link <?php if($this->uri->segment(2)=='witel'){echo 'active'; }?> " href="<?= base_url(); ?>data/witel">
                                 <span class="nav-main-link-name">Witel</span>
                             </a>
                         </li>
