@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '10.137.13.119',
-	'username' => 'tulus',
-	'password' => 'tulus',
+	'hostname' => '127.0.0.1',
+	'username' => 'root',
+	'password' => '',
 	'database' => 'db_asmara',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

@@ -18,6 +18,11 @@
 
        <!-- Page Content -->
        <div class="content">
+           <!-- ALERT -->
+           <div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div>
+
+
+           <!--END -->
 
 
            <!-- Dynamic Table with Export Buttons -->
@@ -34,28 +39,34 @@
                        <thead>
                            <tr>
 
-                               <th>Nomor</th>
+                               <th>No</th>
                                <th class="d-none d-sm-table-cell">STO</th>
-                               <th class="d-none d-sm-table-cell">Datel</th>
+                               <th class="d-none d-sm-table-cell">KSTO</th>
+                                <th class="d-none d-sm-table-cell">Datel</th>
                                <th style="width: 15%;">Action</th>
                            </tr>
                        </thead>
                        <tbody>
-                           <?php if(!empty($query)){?>
+                           <?php if(!empty($sto)){?>
                            <?php $no=1; ?>
-                           <?php foreach($query as $r){?>
+                           <?php foreach($sto as $r){?>
 
                            <tr>
                                <td class="text-center"><?= $no; ?></td>
-                               <td><?= $r['title']; ?></td>
+                               <td><?= $r['tsto']; ?></td>
+                               <td><?= $r['tksto']; ?></td>
 
 
-                               <td class="d-none d-sm-table-cell"><?= $r['datel']; ?></td>
+                                <td class="d-none d-sm-table-cell"><?= $r['dksto']; ?></td>
                                <td>
                                    <!-- <button id='btn-edit' class="btn btn-info" data-id="<?php echo $r['id'];?>">Edit</button> -->
-                                   <input type="button" name="edit" value="Edit" id="<?php echo $r["id"]; ?>" class="btn btn-info btn-xs edit_data" />
-                       <a class=" btn btn-danger" title="Tombol Hapus"
-                                       href="<?= base_url('sto_hapus/').$r['id']; ?>"><i class="fas fa-trash"></i></a>
+                                   <button type="button" name="edit" value="" id="<?php echo $r["id"]; ?>"
+                                       class="btn btn-info btn-xs edit_data"><i class="fas fa-edit"></i></button>
+                                   <a class="btn btn-danger" title="Tombol Hapus"
+                                       href="<?= base_url(); ?>data/sto_dohapus/<?php echo $r["id"]; ?>"
+                                       id="<?php echo $r["id"]; ?>"
+                                       onclick="return confirm('Apakah data ini yakin di Hapus');"><i
+                                           class="fas fa-trash"></i></a>
                                </td>
 
 
@@ -107,6 +118,20 @@
                                                            name="title" placeholder="STO">
                                                    </div>
                                                    <div class="form-group">
+                                                       <label for="val-suggestions">KSTO <span
+                                                               class="text-danger">*</span></label>
+                                                       <select class="form-control" name="id_ksto">
+                                                           <?php 
+
+            foreach($query as $row)
+            { 
+                // print_r($row);
+              echo '<option value="'.$row['id'].'">'.$row['title'] .'</option>';
+            }
+            ?>
+                                                       </select>
+                                                   </div>
+                                                    <!-- <div class="form-group">
                                                        <label for="val-skill">Datel <span
                                                                class="text-danger">*</span></label>
                                                        <select class="form-control" id="val-skill" name="datel">
@@ -116,7 +141,7 @@
 
                                                        </select>
 
-                                                   </div>
+                                                   </div>  -->
 
 
                                                </div>
@@ -164,18 +189,32 @@
                                    <div class="block-content block-content-full">
                                        <div class="">
                                            <!-- Advanced -->
-                                           <input type="hidden" class="form-control" id="val-suggestions"
-                                                           name="id" placeholder="id">
+                                           <input type="hidden" class="form-control" id="val-id" name="id"
+                                               placeholder="id">
                                            <div class="row items-push">
 
                                                <div class="col-lg-12">
                                                    <div class="form-group">
                                                        <label for="val-suggestions">Title <span
                                                                class="text-danger">*</span></label>
-                                                       <input type="text" class="form-control" id="val-suggestions"
+                                                       <input type="text" class="form-control" id="val-title"
                                                            name="title" placeholder="STO">
                                                    </div>
                                                    <div class="form-group">
+                                                       <label for="val-suggestions">KSTO <span
+                                                               class="text-danger">*</span></label>
+                                                       <select class="form-control" name="id_ksto">
+                                                           <?php 
+
+            foreach($query as $row)
+            { 
+                // print_r($row);
+              echo '<option value="'.$row['id'].'">'.$row['title'] .'</option>';
+            }
+            ?>
+                                                       </select>
+                                                   </div>
+                                                   <!-- <div class="form-group">
                                                        <label for="val-skill">Datel <span
                                                                class="text-danger">*</span></label>
                                                        <select class="form-control" id="val-skill" name="datel">
@@ -184,7 +223,7 @@
                                                            <option value="tenggarong">TENGGARONG</option>
 
                                                        </select>
-                                                   </div>
+                                                   </div> -->
                                                </div>
                                            </div>
                                            <!-- END Advanced -->

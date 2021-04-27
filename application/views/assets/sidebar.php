@@ -403,23 +403,23 @@
                     </a>
                     <ul class="nav-main-submenu">
                         <li class="nav-main-item">
+                            <a class="nav-main-link" href="<?= base_url(); ?>data/ksto">
+                                <span class="nav-main-link-name">KSTO</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
                             <a class="nav-main-link" href="<?= base_url(); ?>data/sto">
                                 <span class="nav-main-link-name">STO</span>
                             </a>
                         </li>
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="be_blocks_options.html">
-                                <span class="nav-main-link-name">KSTO</span>
+                            <a class="nav-main-link" href="<?= base_url(); ?>data/target">
+                                <span class="nav-main-link-name">Target</span>
                             </a>
                         </li>
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="be_blocks_forms.html">
-                                <span class="nav-main-link-name">Forms</span>
-                            </a>
-                        </li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link" href="be_blocks_themed.html">
-                                <span class="nav-main-link-name">Themed</span>
+                            <a class="nav-main-link" href="<?= base_url(); ?>data/witel">
+                                <span class="nav-main-link-name">Witel</span>
                             </a>
                         </li>
                         <li class="nav-main-item">
